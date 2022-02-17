@@ -16,6 +16,7 @@ export function logout(values) {
 }
 
 export function setDadosLibrary(values) {
+    console.log('setDadosLibrary', values)
     return {
         type: SET_BOOKS,
         payload: values

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-async function GetData(token) {
-    console.log('GetData', token)
-    let apiUrlGet = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=25&category=biographies';
+export async function getOtherPage(token, page) {
+    let apiUrlGet = `https://books.ioasys.com.br/api/v1/books?page= ${page}&amount=20`
+    console.log('apiUrlGet', apiUrlGet);
     try {
         axios.get(apiUrlGet, {
             headers: {
@@ -11,9 +11,8 @@ async function GetData(token) {
         })
             .then(
                 respget => {
-                    console.log("Response do GET: ", respget.data);
-                    return respget.data.data;
-                    //console.log("Response do GET: ", respget.data.data[0].title);
+                    console.log("Response do GET next: ", respget.data);
+                    return respget.data;
                 }
             );
     } catch (err) {
@@ -21,4 +20,3 @@ async function GetData(token) {
     };
 }
 
-export { GetData };

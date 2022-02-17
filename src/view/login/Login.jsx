@@ -34,9 +34,10 @@ const Login = (props) => {
 
     async function GetData(token) {
         console.log('GetData', token)
-        let webApiUrlGet = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=25&category=biographies';
+        // let webApiUrlGet = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=20&category=biographies';
+        let webApiUrlGetTotal = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=20';
         try {
-            axios.get(webApiUrlGet, {
+            axios.get(webApiUrlGetTotal, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                 }

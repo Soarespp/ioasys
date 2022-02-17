@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { logout } from '../../store/actions/auth/actionAuth';
+import { bindActionCreators } from 'redux';
+import * as actionAuth from '../../store/actions/auth/actionAuth';
 import './Home.css';
+
+import { getOtherPage } from '../../service/api';
+import axios from "axios";
 
 import imgLogin from '../../img/ioasys.png';
 import books from '../../img/books.png';
@@ -26,8 +30,41 @@ const style = {
 const Home = (props) => {
     const { library, auth, bookInfo } = props;
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    async function setNextPage(page, type) {
+        setLoading(true);
+        if (type === 'N') {
+            page++;
+        } else {
+            page--;
+        }
+        console.log('page', page)
+        // props.setDadosLibrary(await getOtherPage(auth.token, page))
+        await GetData(page);
+    }
+
+    async function GetData(page) {
+        let apiUrlGet = `https://books.ioasys.com.br/api/v1/books?page= ${page}&amount=20`
+        try {
+            axios.get(apiUrlGet, {
+                headers: {
+                    "Authorization": `Bearer ${auth.token}`,
+                }
+            })
+                .then(
+                    respget => {
+                        console.log("Response do GET: ", respget.data);
+                        props.setDadosLibrary(respget.data);
+                        setLoading(false);
+                    }
+                );
+        } catch (err) {
+            console.log('error get', err)
+        };
+    }
 
     return (
         <div className='Home'>
@@ -42,7 +79,7 @@ const Home = (props) => {
                     <button onClick={() => props.logout()}>Sair</button>
                 </div>
             </div>
-            {(library.data) ?
+            {((library.data) || (loading)) ?
                 <div className='container'>
                     <div className='lista'>
                         {library.data
@@ -52,9 +89,9 @@ const Home = (props) => {
                         }
                     </div>
                     <div className='button'>
-                        Pagina 1 de 100
-                        <button>A</button>
-                        <button>B</button>
+                        {`Pagina ${library.page} de ${library.totalPages}`}
+                        <button onClick={() => setNextPage(library.page, 'P')} disabled={library.page <= 1}>Prev</button>
+                        <button onClick={() => setNextPage(library.page, 'N')} disabled={library.page === library.totalPages}>Next</button>
                     </div>
 
                 </div>
@@ -82,14 +119,6 @@ const mapStateToProps = state => (
         library: state.auth.library
     })
 
-function mapDispatchToProps(dispatch) {
-    return {
-        logout() {
-            //action creator -> action
-            const action = logout()
-            dispatch(action)
-        }
-    }
-}
+const mapDispatchToProp = (dispatch) => bindActionCreators(actionAuth, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProp)(Home);
