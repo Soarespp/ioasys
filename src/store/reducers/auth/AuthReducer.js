@@ -26,11 +26,8 @@ const INITIAL_STATE = {
 }
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
-    console.log('reducer 1', action.type);
-    console.log('reducer 2', action.payload);
     switch (action.type) {
         case SET_BOOKS:
-            console.log('SET_BOOKS', action.payload)
             return { ...state, library: action.payload }
         case AUTH_LOGIN:
             return { ...state, user: action.payload.data.name, token: action.payload.headers.authorization, validToken: true, profileObj: action.payload.data }
