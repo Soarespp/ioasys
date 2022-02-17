@@ -1,23 +1,41 @@
 .Detail{    
     display: flex;
     font-size: 15px;
+    width: 100%;
+    height: 100%;
 }
 
 .Detail .container{
-    width: 100%;
-    display: flex;
+    /* width: 100%;
+    height: 100%;
+    display: flex; */
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 2fr));
+    grid-gap: 15px;
+    row-gap: 15px;
 }
 
 .Detail .imgLogin{
-    width: 50%;
+    /* width: 50%; */
+    height: 500px;
+    min-width: 200px;
+    min-height: 400px;
 }
 
 .Detail .modal-description {
-    width: 50%;
-    margin: 5px;
     justify-content: space-between;
+    min-width: 250px;
    
 }
+
+.Detail .modal-img {
+    width: 50%;
+    height: 200px;
+    min-width: 200px;
+   
+}
+
 .Detail .container .header{
     text-align: left;
     width: 80%;

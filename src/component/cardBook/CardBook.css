@@ -6,6 +6,9 @@
     display: grid;
     grid-template-columns: auto auto;
     padding: 15px;
+    height: 200px;
+    width: 90%;
+    min-width: 200px;
 }
 
 .CardBook .imgLogin{

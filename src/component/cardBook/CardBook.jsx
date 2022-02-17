@@ -5,19 +5,15 @@ import * as libraryActions from '../../store/actions/auth/actionAuth'
 import './CardBook.css';
 
 const CardBook = (props) => {
-    const { book, click, auth, setDetail } = props;
+    const { book, click, setDetail } = props;
 
     const testeFun = () => {
-        console.log('testeFun', book);
-        console.log('testeFun 1', auth.book);
         setDetail(book);
-        console.log('testeFun 2', auth.book);
     }
 
     return (
-        <div onClick={testeFun}>
+        <div onClick={testeFun} >
             <div className='CardBook' onClick={click}>
-
                 < img src={book.imageUrl} className="imgLogin" alt="books" />
                 <div className='title'>
                     <b style={{ fontSize: '14px', fontStyle: '' }}>{book.title}</b>

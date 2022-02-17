@@ -42,7 +42,8 @@
 }
 
 .Home .container{
-    width: 70%;
+    width: 80%;
+    height: 500px;
     margin: auto;
 }
 
@@ -50,17 +51,12 @@
     display: grid;
     grid-column-start: 2;
     grid-column-end: 4;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
     grid-gap: 15px;
     row-gap: 15px;
-}
-.Home .modal-description{
-    background-color: blue;
-    
 }
 
 .Home .button{
     text-align: end;
     margin-top: 10px;
 }
-

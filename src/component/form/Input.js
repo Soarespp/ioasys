@@ -14,7 +14,7 @@ export default function Input({ name, ...rest }) {
         })
     }, [inputRef, registerField, fieldName]);
     return (
-        <div>
+        <div style={{ width: '97%' }}>
             <input ref={inputRef} defaultValue={defaultValue} {...rest} />
             {error && <span syle={{ color: '#f00' }}>{error}</span>}
         </div>

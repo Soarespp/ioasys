@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import * as Yup from 'yup';
 import * as actionAuth from '../../store/actions/auth/actionAuth';
-// import { login } from '../../store/actions/auth/actionAuth';
 import { Form } from '@unform/web';
 import Input from '../../component/form/Input';
 import imgLogin from '../../img/ioasys.png';
@@ -14,26 +13,24 @@ import axios from "axios";
 
 
 const Login = (props) => {
-    const { auth } = props;
     const formRef = useRef(null);
 
-    async function LoginAcess() {
+    async function LoginAcess(user, pass) {
         try {
             let webApiUrlPost = 'https://books.ioasys.com.br/api/v1/auth/sign-in';
 
             let resp = await axios.post(webApiUrlPost, {
-                email: "desafio@ioasys.com.br",
-                password: "12341234"
+                email: user,
+                password: pass
             });
-            console.log('resp', resp)
             return resp;
         } catch (error) {
+            alert('Usuário invalido!')
             console.log('error', error)
         }
     }
 
     async function GetData(token) {
-        console.log('GetData', token)
         // let webApiUrlGet = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=20&category=biographies';
         let webApiUrlGetTotal = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=20';
         try {
@@ -44,7 +41,6 @@ const Login = (props) => {
             })
                 .then(
                     respget => {
-                        console.log("Response do GET: ", respget.data);
                         props.setDadosLibrary(respget.data);
                     }
                 );
@@ -64,8 +60,7 @@ const Login = (props) => {
                 abortEarly: false,
             })
 
-            // props.loginUser({ data: { name: 'pedro' }, headers: { authorization: 'teste' } });
-            const dadosLogin = await LoginAcess();
+            const dadosLogin = await LoginAcess(data.user, data.password);
             if (dadosLogin.status === 200) {
                 await GetData(dadosLogin.headers.authorization);
                 props.loginUser(dadosLogin);
@@ -92,12 +87,13 @@ const Login = (props) => {
                     <img src={books} className="imgLogin" alt="books" />
                 </div>
                 <div className='body'>
+                /* email: "desafio@ioasys.com.br",
+                    password: "12341234" */
                     <Input className="inputUser" name="user" placeholder="Email" />
                     <Input type="password" name="password" placeholder="senha" />
-                    <button type="submit">Login</button>
+                    <button type="submit" >Login</button>
                 </div>
             </Form>
-            {/* </div> */}
         </div>
     )
 }

@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as actionAuth from '../../store/actions/auth/actionAuth';
 import './Home.css';
 
-import { getOtherPage } from '../../service/api';
 import axios from "axios";
 
 import imgLogin from '../../img/ioasys.png';
@@ -20,7 +19,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    width: '70%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 50,
@@ -28,7 +27,7 @@ const style = {
 };
 
 const Home = (props) => {
-    const { library, auth, bookInfo } = props;
+    const { library, auth } = props;
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -41,8 +40,6 @@ const Home = (props) => {
         } else {
             page--;
         }
-        console.log('page', page)
-        // props.setDadosLibrary(await getOtherPage(auth.token, page))
         await GetData(page);
     }
 
@@ -56,7 +53,6 @@ const Home = (props) => {
             })
                 .then(
                     respget => {
-                        console.log("Response do GET: ", respget.data);
                         props.setDadosLibrary(respget.data);
                         setLoading(false);
                     }

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './Detail.css';
 import { connect } from "react-redux";
 
+import { ViewImg } from './style';
+
 const Detail = (props) => {
     const { bookInfo } = props;
     const [bookInterno, setBookInterno] = useState({
@@ -32,7 +34,9 @@ const Detail = (props) => {
             {
                 (bookInterno) ?
                     <div className='container'>
-                        <img src="https://d2drtqy2ezsot0.cloudfront.net/Book-0.jpg" className="imgLogin" alt="books" />
+                        <div className='modal-img'>
+                            <ViewImg src={bookInterno.imageUrl} />
+                        </div>
                         <div className='modal-description'>
                             <div className='header'>
                                 <div className='title'><b>{bookInterno.title}</b></div>
