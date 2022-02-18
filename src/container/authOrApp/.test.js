@@ -1,17 +1,18 @@
 import React, { render } from "@testing-library/react";
-import NewHome from "./newHome";
+import AuthOrApp from "./AuthOrApp";
 import configureMockStore from "redux-mock-store";
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import MatchMediaMock from 'jest-matchmedia-mock';
 
-describe("<NewHome />", () => {
+describe("<AuthOrApp />", () => {
     let props;
     let matchMedia;
-    const setCountry = jest.fn();
 
     beforeEach(() => {
         props = {
+            user: {},
+            validToken: true,
             library: {},
             auth: {},
             bookInfo: {}
@@ -31,7 +32,7 @@ describe("<NewHome />", () => {
 
     const store = mockStore({
         auth: {
-            user: '',
+            user: 'teste',
             validToken: false,
             token: '',
             book: {},
@@ -59,6 +60,10 @@ describe("<NewHome />", () => {
     const mediaQuery = '(prefers-color-scheme: light)';
 
     test('render component', () => {
-        expect(render(<Provider store={store}><NewHome {...props} /></Provider>));
+        expect(render(<Provider store={store}><AuthOrApp {...props} /></Provider>));
+    })
+
+    test('render component home', () => {
+        expect(render(<Provider store={store}><AuthOrApp {...props} /></Provider>));
     })
 });

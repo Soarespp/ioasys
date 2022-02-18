@@ -1,11 +1,11 @@
-import React, { render, screen, fireEvent } from "@testing-library/react";
-import Home from "./Home";
+import React, { render } from "@testing-library/react";
+import Detail from "./Detail";
 import configureMockStore from "redux-mock-store";
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import MatchMediaMock from 'jest-matchmedia-mock';
 
-describe("<Home />", () => {
+describe("<Detail />", () => {
     let props;
     let matchMedia;
 
@@ -58,6 +58,6 @@ describe("<Home />", () => {
     const mediaQuery = '(prefers-color-scheme: light)';
 
     test('render component', () => {
-        expect(render(<Provider store={store}><Home {...props} /></Provider>));
+        expect(render(<Provider store={store}><Detail {...props} /></Provider>));
     })
 });

@@ -27,7 +27,7 @@ const Detail = (props) => {
         if (bookInterno.id !== bookInfo.id) {
             setBookInterno(bookInfo);
         }
-    }, [])
+    }, [bookInfo, bookInterno])
 
     return (
         <div className='Detail' >

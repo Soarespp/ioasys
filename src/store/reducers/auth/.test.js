@@ -1,7 +1,7 @@
 import authReducer from "./AuthReducer";
 import { AUTH_LOGIN, AUTH_LOGOUT, SET_BOOKS, SET_DETAIL } from '../../actionsType';
 
-describe("reducerCountry", () => {
+describe("reducerLibrary", () => {
     const state = {
         user: '',
         validToken: false,
@@ -51,6 +51,23 @@ describe("reducerCountry", () => {
         expect(authReducer(undefined, action)).toEqual({
             ...state,
             bookInfo: { name: 'teste' },
+        });
+    });
+
+    test("return when AUTH_LOGIN", () => {
+        const action = {
+            type: AUTH_LOGIN, payload: {
+                data: { name: 'data' },
+                headers: { authorization: 'auth' }
+            }
+        };
+
+        expect(authReducer(undefined, action)).toEqual({
+            ...state,
+            user: 'data',
+            token: 'auth',
+            validToken: true,
+            profileObj: { name: 'data' }
         });
     });
 

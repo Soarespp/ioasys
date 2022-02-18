@@ -36,9 +36,12 @@
 }
 
 .Home .header .menu{
+    display: flex;
     width: 50%;
     height: 20px;
-    text-align: end;
+    align-items: center;
+    text-align: right;
+    align-content: flex-end;
 }
 
 .Home .container{
@@ -57,6 +60,7 @@
 }
 
 .Home .button{
-    text-align: end;
+    display: inline-flex;
     margin-top: 10px;
+    margin-left: 90%;
 }

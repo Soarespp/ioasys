@@ -8,6 +8,8 @@ import Input from '../../component/form/Input';
 import imgLogin from '../../img/ioasys.png';
 import books from '../../img/books.png';
 
+import { Logo } from './style';
+
 import './Login.css';
 import axios from "axios";
 
@@ -25,13 +27,12 @@ const Login = (props) => {
             });
             return resp;
         } catch (error) {
-            alert('Usuário invalido!')
+            alert('E-mail e/ou senha incorretos!')
             console.log('error', error)
         }
     }
 
     async function GetData(token) {
-        // let webApiUrlGet = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=20&category=biographies';
         let webApiUrlGetTotal = 'https://books.ioasys.com.br/api/v1/books?page=1&amount=20';
         try {
             axios.get(webApiUrlGetTotal, {
@@ -83,15 +84,13 @@ const Login = (props) => {
         <div className='login'>
             <Form className='container' onSubmit={handleSubmit} ref={formRef}>
                 <div className='header'>
-                    <img src={imgLogin} className="imgLogin" alt="imgLogin" />
-                    <img src={books} className="imgLogin" alt="books" />
+                    <Logo width='37%' height='70%' src={imgLogin} />
+                    <Logo width='37%' height='59%' src={books} />
                 </div>
                 <div className='body'>
-                /* email: "desafio@ioasys.com.br",
-                    password: "12341234" */
-                    <Input className="inputUser" name="user" placeholder="Email" />
-                    <Input type="password" name="password" placeholder="senha" />
-                    <button type="submit" >Login</button>
+                    <Input className="inputUser" name="user" placeholder="Email" data-testid='login-input-user' />
+                    <Input type="password" name="password" placeholder="senha" data-testid='login-input-pass' />
+                    <button type="submit" data-testid='login-button-logar'>Login</button>
                 </div>
             </Form>
         </div>

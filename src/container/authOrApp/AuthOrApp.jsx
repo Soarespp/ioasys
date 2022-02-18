@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Home from '../../view/home/Home';
 import Login from '../../view/login/Login';
-import NewHome from '../../view/newHome/newHome';
 
 class AuthOrApp extends Component {
     render() {

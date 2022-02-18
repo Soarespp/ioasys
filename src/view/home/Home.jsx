@@ -14,6 +14,11 @@ import Detail from '../../container/detail/Detail';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
+import { ButtonImg } from './style';
+import imgNext from '../../img/next.png'
+import back from '../../img/back.png'
+import logout from '../../img/logout.png'
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -70,9 +75,11 @@ const Home = (props) => {
                     <img src={books} className="imgLogin-books" alt="books" />
                 </div>
                 <div className='menu'>
-                    <span className="welcome">Bem vindo,</span>
-                    {(auth.user) ? <span>{auth.user}</span> : null}
-                    <button onClick={() => props.logout()}>Sair</button>
+                    <div style={{ width: '95%' }}>
+                        <span className="welcome">Bem vindo,</span>
+                        {(auth.user) ? <span>{auth.user}</span> : null}
+                    </div>
+                    <ButtonImg width='30px' height='30px' src={logout} onClick={() => props.logout()} />
                 </div>
             </div>
             {((library.data) || (loading)) ?
@@ -86,13 +93,12 @@ const Home = (props) => {
                     </div>
                     <div className='button'>
                         {`Pagina ${library.page} de ${library.totalPages}`}
-                        <button onClick={() => setNextPage(library.page, 'P')} disabled={library.page <= 1}>Prev</button>
-                        <button onClick={() => setNextPage(library.page, 'N')} disabled={library.page === library.totalPages}>Next</button>
+                        <ButtonImg width='12px' height='20px' src={back} onClick={() => setNextPage(library.page, 'P')} disabled={library.page <= 1} data-testid='home-button-next' />
+                        <ButtonImg width='12px' height='20px' src={imgNext} onClick={() => setNextPage(library.page, 'N')} disabled={library.page === library.totalPages} data-testid='home-button-back' />
                     </div>
-
                 </div>
                 :
-                <div> Loading...</div>}
+                <div>Loading...</div>}
             <div className='modal'>
                 <Modal
                     open={open}
